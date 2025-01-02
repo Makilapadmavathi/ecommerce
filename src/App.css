@@ -1,6 +1,6 @@
 /* Ecom sign up */
 .ecombackground-image {
-  background-image: url('C:\GT\gt-ecommerce\src\Images\ecombannernew.png');
+  background-image: url('C:\GT\ecommerce\src\Images\ecombannernew.png');
   background-size: cover; 
   /* background-repeat: no-repeat;  */
 
@@ -8,7 +8,7 @@
 .ecomcontainer-center {
   padding-top: 100px;
   padding-left: 300px;
-  display:flexbox;
+  /* display:flexbox; */
 color: #c50b78c5;
   justify-content: right;
   align-items: center;
@@ -138,6 +138,109 @@ margin-top: 1px;
 }
 .home {
   display: flex;
+}
+@media (max-width: 480px) {
+  .ecomcontainer-center {
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center; /* Center form horizontally */
+    align-items: center; /* Center form vertically */
+    text-align: center;
+  }
+
+  .ecomform-container {
+    max-width: 100%; /* Ensures full width on smaller screens */
+    padding: 10px;
+  }
+
+  .ecombackground-image {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .closebutton {
+    font-size: 1.2rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  .input input,
+  .input select,
+  .input textarea {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+  .cartlistcontainer {
+    padding: 15px; /* Reduce padding for mobile */
+    max-width: 100%; /* Allow the container to use full width */
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    margin: 0 15px; /* Add margin to the sides to avoid touching the edges */
+  }
+
+  .product {
+    margin: 10px 0; /* Reduce margin between product items */
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .product img {
+    width: 100%; /* Make images responsive */
+    height: auto;
+  }
+
+  .product-price {
+    font-size: 18px; /* Reduce font size for mobile */
+  }
+
+  .product-detail {
+    padding: 0 1rem; /* Reduce padding inside product details */
+  }
+
+  .product h4, .product h5, .product p {
+    font-size: 14px; /* Reduce font size for product text */
+  }
+
+  .product button {
+    padding: 5px 10px; /* Reduce button size */
+    font-size: 14px; /* Reduce font size for buttons */
+  }
+
+  .filters {
+    width: 100%; /* Make filter section full width */
+    margin: 10px 0;
+    padding: 15px;
+  }
+
+  .filters .title {
+    font-size: 20px; /* Reduce font size for filters title */
+  }
+
+  .summary {
+    width: 100%; /* Make the summary section full width */
+    margin-top: 15px;
+    text-align: center; /* Center-align summary content */
+  }
+
+  .filters > span {
+    padding-bottom: 10px;
+  }
+
+  .productContainer {
+    width: 100%; /* Ensure product container takes full width on mobile */
+    padding: 15px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home {
+    display: block; /* Stack elements vertically on smaller screens */
+  }
 }
 
 
