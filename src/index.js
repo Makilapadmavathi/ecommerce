@@ -1,20 +1,20 @@
+// index.js or App.js
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-
-import App from './App'; 
+import App from './App';
+import { CartProvider } from './Components/Cartcontext';
+import { Provider } from 'react-redux';
+import store from './Components/store';
 import { BrowserRouter } from 'react-router-dom';
-import { CartProvider } from './Components/Cartcontext'
-
 
 ReactDOM.render(
-
-    <BrowserRouter>
+  <Provider store={store}>
     <CartProvider>
-    <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </CartProvider>
-    </BrowserRouter>
- ,
+  </Provider>,
   document.getElementById('root')
 );
-

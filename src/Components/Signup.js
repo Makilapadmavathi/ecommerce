@@ -48,19 +48,12 @@ const navigate=useNavigate();
                 Password: records.Password,
                 Confirmpassword:records.Confirmpassword,
             };
-            localStorage.setItem("usernamesess", datas.Username);
-            navigate('/')
-            //    const usernamesess=sessionStorage.getItem('usernamesess');
-            // axios.get("",datas)
-            //     .then((response) => {
-            //         //console.log(datas)
-            //         // navigate('/', { replace: true });
-            //           console.log(datas) 
-            //           navigate('/')
-            //           }
-                      
-            //           )
-            //           .catch((err) => { "invalid "});
+            localStorage.setItem("username", datas.Username);
+            localStorage.setItem("password",datas.Password)
+            
+                      console.log(datas) 
+                      navigate('/')
+                    
         };
         
 
@@ -76,7 +69,8 @@ const navigate=useNavigate();
           >
             {({handleChange, handleSubmit }) => (
              
-                <Form noValidate className="ecomform-container px-4" ><Link to='/'><CloseButton className="closebutton" /></Link>
+                <Form noValidate className="ecomform-container px-4" >
+                    <Link to='/'><CloseButton className="closebutton" /></Link>
                     <h3>Sign Up</h3><br /><br />
                     <Form.Group className="mb-3 input" controlId="formBasicEmail">
                         <InputGroup className="mb-3">

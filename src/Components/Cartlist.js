@@ -1,125 +1,149 @@
-import React,{useState,useEffect} from "react";
-import { useCart } from "./Cartcontext";
-import { Trash } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
-import { Form, InputGroup, Row, Col, Button } from "react-bootstrap";
-
-function Cartlist() {
+// Cartlist.js
+import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { removeFromCart, increaseQuantity, decreaseQuantity } from './actions';
+import { useCart } from './Cartcontext';
+const Cartlist = ({
+  cartItems,
+  removeFromCart,
+  increaseQuantity,
+  decreaseQuantity,
+}) => {
+  const [total, setTotal] = useState(0);
   const { cartState, cartDispatch } = useCart();
-  const { cartItems } = cartState;
-  const [total, setTotal] = useState();
-  console.log(cartItems)
+  console.log(cartState)
   useEffect(() => {
     setTotal(
-      cartItems.reduce((acc, curr) => acc + curr.price * curr.quantity, 0).toFixed(2)
+      cartState && cartState.cartItems.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
     );
-  }, [cartItems]);
+  }, [cartState]);
 
-  const handleAddToCart = (item) => {
-   
-    
+  console.log('CartItems in Cartlist:', cartItems); 
+
+  // const handleAddToCart = (item) => {
+  //   const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
+
+  //   if (existingItem) {
+  //     increaseQuantity(item);
+  //   } else {
+  //     console.log('Dispatch ADD_TO_CART with payload:', item);
+     
+  //   }
+  // };
+
+  // const handleDecrease = (item) => {
+  //   console.log('Dispatch DECREASE_QUANTITY with payload:', item);
+ 
+  //   decreaseQuantity(item);
+  // };
+  const handleAddToCart = (id) => {
+    console.log(id)
+    const existingItem = cartState.cartItems.find((item) => item.id === id);
+console.log(existingItem)
+    if (existingItem) {
       console.log("Item already exists in the cart. Increasing quantity.");
-      cartDispatch({ type: "INCREASE_QUANTITY", payload: item });
-   
+      cartDispatch({ type: "INCREASE_QUANTITY", payload: id });
+    } 
   };
 
+  const handleDecrease = (id) => {
+    const existingItem = cartState.cartItems.find((item) => item.id === id);
 
-  const handleDecrease = (item) => {
-    console.log("Dispatching DECREASE_QUANTITY with payload:", item.id);
-    cartDispatch({ type: "DECREASE_QUANTITY", payload: item });
+    if (existingItem && existingItem.quantity > 1) {
+      console.log("Dispatching DECREASE_QUANTITY with payload:", id);
+      cartDispatch({ type: "DECREASE_QUANTITY", payload: id });
+    } else {
+      console.log("Item quantity is 1. Removing from cart.");
+      cartDispatch({
+        type: "REMOVE_FROM_CART",
+        payload:id,
+      });
+    }
   };
+  const getTotalPrice = (id,price) => {
+    const itemInCart = cartState && cartState.cartItems.find((item) => item.id === id);
+    return itemInCart ? itemInCart.price * itemInCart.quantity : price;
+  };
+
   return (
     <div className="home">
-    <div className="productContainer">
-      <h2 style={{ textAlign: "center" }}>Cart Items</h2>
+      <div className="productContainer">
+        <h2 style={{ textAlign: 'center' }}>Cart Items</h2>
 
-      <div style={{ backgroundColor: "secondary", padding: "50px 10%" }}>
-        {cartItems.map((item) => (
-          <div key={item.id} className="row product">
-            <div className="col-md-2">
-              <img
-                src={item.image}
-                alt="Sample Image"
-                height="150"
-                width="140"
-              />
-              <h7> rating - {item.rating.rate} ,</h7>
-              <h8> count -{item.rating.count}</h8>
-              <h5>quantity - {item.quantity}</h5>
-            </div>
-            <div className="col-md-8 product-detail">
-              <h4>{item.title}</h4>
-              <h5>{item.category}</h5>
-              <p>{item.description}</p>
-                 
-              <Link to={`/viewdetail/${item.id}`}>
-                        <Button variant="info">View Details</Button>
-                      </Link>{' '}
-            </div>
-            <div className="col-md-4">
-              {/* <Form.Select
-                onChange={(e) =>
-                  cartDispatch({
-                    type: "CHANGE_CART_QTY",
-                    payload: {
-                      id: item.id,
-                      quantity: e.target.value,
-                    },
-                  })
-                }
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </Form.Select> */}
-              {/* <Button
-                variant="info"
-                onClick={() =>
-                  cartDispatch({
-                    type: "ADD_TO_CART",
-                    payload: item,
-                  })
-                }
-              >
-                Add to Cart
-              </Button> */}
-                <Button variant="info" onClick={()=>handleAddToCart(item)}>+</Button>{'    '}
-        <Button variant="danger" onClick={()=>handleDecrease(item)}>-</Button>{'    '}
-              <Button
-                type="button"
-                variant="warning"
-                onClick={() =>
-                  cartDispatch({
-                    type: "REMOVE_FROM_CART",
-                    payload: item,
-                  })
-                }
-              >
-                Remove From Cart
-                {/* <Trash fontSize="20px" /> */}
-              </Button>
-            
-            </div>
-            <div className="col-md-2 product-price"> Rs. {(parseFloat(item.price)*item.quantity).toFixed(2)}</div>
-          
-          </div>
+        <div style={{ backgroundColor: 'white', padding: '10px 10%' }}>
+  {cartState && cartState.cartItems.length > 0 ? (
+    cartState.cartItems.map((cartItem) => (
+      <div key={cartItem.id} className="row product" style={{ textAlign: "center",backgroundColor:"white" }}>
+        <img
+          src={cartItem.image}
+          style={{ width: "250px", display: "block", margin: "0 auto" }}
+          alt="Product"
+        />
         
-        ))}
-         
+        <p style={{ textAlign: "center", fontFamily: "fantasy" }}>{cartItem.title}</p>
+        <p style={{ textAlign: "center", fontFamily: "cursive" }}>Quantity: {cartItem.quantity}</p>
+        <h5 style={{ textAlign: "center", fontFamily: "cursive" }}>
+          Rs.{getTotalPrice(cartItem.id, cartItem.price)}
+        </h5>
+
+        {/* Centering the buttons */}
+        <div style={{ textAlign: "center" }}>
+          <Button
+            variant="info"
+            onClick={() => handleAddToCart(cartItem.id)}
+           
+          >
+            +
+          </Button>&nbsp; &nbsp;
+          <Button
+            variant="danger"
+            onClick={() => handleDecrease(cartItem.id)}
+           
+          > 
+            -
+          </Button>&nbsp; &nbsp;
+          <Button
+            variant="warning"
+            onClick={() =>
+              cartDispatch({
+                type: "REMOVE_FROM_CART",
+                payload: cartItem.id,
+              })
+            }
+           
+          >
+            Remove 
+          </Button>
+        </div>
       </div>
- 
-    </div>
-    <div className="filters summary">
-           <span className="title">Subtotal ({cartItems.length}) items</span>
-           <span style={{ fontWeight: 700, fontSize: 20 }}>Total: ₹ {total}</span>
-           <Button type="button" disabled={cartItems.length === 0}>
-             Proceed to Checkout
-           </Button>
-         </div>
+    ))
+  ) : (
+    <p style={{ textAlign: "center" }}>No items in cart</p>
+  )}
+</div>
+      </div>
+      <div className="filters summary">
+        <span className="title">Subtotal ({cartItems.length}) items</span>
+        <span style={{ fontWeight: 700, fontSize: 20 }}>
+          Total: ₹ {total.toFixed(2)}
+        </span>
+        <Button type="button" disabled={cartItems.length === 0}>
+          Proceed to Checkout
+        </Button>
+      </div>
     </div>
   );
-}
+};
 
-export default Cartlist;
+const mapStateToProps = (state) => ({
+  cartItems: state.cart && state.cart.cartItems ? state.cart.cartItems : [],
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  removeFromCart: (product) => dispatch(removeFromCart(product)),
+  increaseQuantity: (product) => dispatch(increaseQuantity(product)),
+  decreaseQuantity: (product) => dispatch(decreaseQuantity(product)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cartlist);
