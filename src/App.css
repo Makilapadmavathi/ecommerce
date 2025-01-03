@@ -1,78 +1,58 @@
-/* Ecom Sign Up and Login */
+/* Ecom sign up */
 .ecombackground-image {
-  background-image: url('C:\GT\gt-ecommerce - Redux\src\Images\ecombannernew.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 100vh;
-}
-.closebutton{
-  float: right;
-margin-top: 1px;
+  background-image: url('C:\GT\ecommerce\src\Images\ecombannernew.png');
+  background-size: cover; 
+  /* background-repeat: no-repeat;  */
 
-}
-.navbar-toggler {
-  border: none;  /* Remove the default border */
-}
-
-/* Style for the hamburger icon when the navbar is expanded */
-.navbar-toggler-icon {
-  background-color: white;  /* Change the icon color to white */
-}
-
-/* Change the color of the hamburger icon when expanded */
-.navbar-collapse.show .navbar-toggler-icon {
-  background-color: white;  /* Ensure the color remains white when expanded */
 }
 .ecomcontainer-center {
-  display: flex;
-  justify-content: center;
+  padding-top: 100px;
+  padding-left: 300px;
+  /* display:flexbox; */
+color: #c50b78c5;
+  justify-content: right;
   align-items: center;
   text-align: center;
-  height: 100vh;
-  padding: 20px;
-}
+  height: 100vh; 
 
+  
+}
 .ecomform-container {
   color: #080808;
-  max-width: 500px;
+  max-width: 500px; 
   padding: 20px;
   border: 1px solid #e9e1e1;
   border-radius: 5px;
   background-color: rgb(188, 250, 241);
-  width: 100%;
 }
 
 /* Logo */
-.logo {
+.logo{
   width: 90px;
-  color: white;
+  color:'white';
 }
-
-.cart {
+.cart{
   width: 50px;
-  color: white;
+  color:'white';
   padding-right: 10px;
 }
+.cartbutton{
+color:rgb(240, 235, 235);
+padding-left: 10px;
 
-.cartbutton {
-  color: rgb(240, 235, 235);
-  padding-left: 10px;
 }
+.cartf{
 
-.cartf {
-  color: azure;
-  padding-top: 1px;
+  color:azure;
+padding-top: 1px;
 }
-
 /* Navbar */
 .custom-dropdown {
   border: 1px solid white;
   border-radius: 5px;
   background-color: aliceblue;
 }
-
-/* Product */
+/*Product*/
 header {
   padding: 1rem 0;
 }
@@ -96,23 +76,27 @@ header {
   font-weight: bold;
   font-size: 140%;
 }
+.closebutton{
+  float: right;
+margin-top: 1px;
 
-/* View Product */
+}
+
+/* view product */
 .viewdetail-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  border: 1px solid #ccc; 
+  border-radius: 10px; 
   padding: 20px;
-  margin: auto;
+  margin: auto; 
   margin-top: 50px;
-  max-width: 600px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
 }
-
-/* Cart List */
+/* Cart list */
 .cartlistcontainer {
   display: flex;
   justify-content: center;
@@ -120,18 +104,17 @@ header {
   border-radius: 5px;
   border: 1px solid black;
   max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
+  margin: 0 auto; 
+  text-align: center; 
 }
-
-/* Filters */
+/*  */
 .filters {
   background-color: #343a40;
   color: white;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 20%;
   margin: 10px;
   height: 86vh;
 }
@@ -143,46 +126,123 @@ header {
 .title {
   font-size: 30px;
 }
-
 .summary {
   width: 30%;
 }
-
 .productContainer {
   display: flex;
-  width: 100%;
+  width: 78%;
   padding: 20px;
   flex-wrap: wrap;
   justify-content: space-around;
 }
-
 .home {
   display: flex;
 }
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .ecomcontainer-center {
     padding-left: 10px;
     padding-right: 10px;
+    justify-content: center; /* Center form horizontally */
+    align-items: center; /* Center form vertically */
+    text-align: center;
   }
 
   .ecomform-container {
-    padding: 15px;
-    max-width: 100%;
+    max-width: 100%; /* Ensures full width on smaller screens */
+    padding: 10px;
   }
 
-  .filters {
-    width: 100%;
+  .ecombackground-image {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .closebutton {
+    font-size: 1.2rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+  }
+
+  .input input,
+  .input select,
+  .input textarea {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+  .cartlistcontainer {
+    padding: 15px; /* Reduce padding for mobile */
+    max-width: 100%; /* Allow the container to use full width */
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    margin: 0 15px; /* Add margin to the sides to avoid touching the edges */
+  }
+
+  .product {
+    margin: 10px 0; /* Reduce margin between product items */
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  .product img {
+    width: 100%; /* Make images responsive */
     height: auto;
   }
 
-  .productContainer {
-    flex-direction: column;
-    justify-content: center;
+  .product-price {
+    font-size: 18px; /* Reduce font size for mobile */
   }
 
-  .cartlistcontainer {
+  .product-detail {
+    padding: 0 1rem; /* Reduce padding inside product details */
+  }
+
+  .product h4, .product h5, .product p {
+    font-size: 14px; /* Reduce font size for product text */
+  }
+
+  .product button {
+    padding: 5px 10px; /* Reduce button size */
+    font-size: 14px; /* Reduce font size for buttons */
+  }
+
+  .filters {
+    width: 100%; /* Make filter section full width */
+    margin: 10px 0;
+    padding: 15px;
+  }
+
+  .filters .title {
+    font-size: 20px; /* Reduce font size for filters title */
+  }
+
+  .summary {
+    width: 100%; /* Make the summary section full width */
+    margin-top: 15px;
+    text-align: center; /* Center-align summary content */
+  }
+
+  .filters > span {
+    padding-bottom: 10px;
+  }
+
+  .productContainer {
+    width: 100%; /* Ensure product container takes full width on mobile */
+    padding: 15px;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .home {
+    display: block; /* Stack elements vertically on smaller screens */
   }
 }
+
+
+
+

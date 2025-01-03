@@ -9,8 +9,6 @@ import { useReducer } from 'react';
 import { createContext } from 'react';
 import Viewdetail from './Components/Viewdetail';
 import Cartlist from './Components/Cartlist';
-import { CartProvider } from './Components/Cartcontext';
-import Login from './Components/Login';
 // export const CountContext= createContext();
 // const initialstate=0;
 // const reducer=(state,action)=>{
@@ -34,26 +32,23 @@ function App() {
 
   return (
     // <CountContext.Provider value={{ count, dispatch }}>
-    <CartProvider>
     <div>
-    {location.pathname !== '/signup' && location.pathname !== '/' &&(
+    {location.pathname !== '/signup' && (
         <Navbarecom isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       )}
      
       <Routes>
       {/* <Route path='/' element={  <Navbarecom isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} username={username}/>}></Route> */}
-    <Route path='/home' element={<Home/>}></Route>
+    <Route path='/' element={<Home/>}></Route>
     {/* <Route path='/category/jewelery' element={<Home/>}></Route> */}
      <Route path='/signup' element={<Signup setIsLoggedIn={setIsLoggedIn} />}></Route>
-     <Route path='/' element={<Login setIsLoggedIn={setIsLoggedIn} />}></Route>
      <Route path="/viewdetail/:id" element={<Viewdetail />} />
      
      <Route path="/cartlist" element={<Cartlist />} />
       </Routes>
       
     </div>
-      {/* // </CountContext.Provider> */}
-      </CartProvider>
+      //  </CountContext.Provider>
   );
 }
 
